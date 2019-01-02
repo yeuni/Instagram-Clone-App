@@ -135,7 +135,7 @@ public TextView username,likes,publisher,description,comments;
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 comments.setText("view All "+dataSnapshot.getChildrenCount() + " Comments");
-
+//yes
             }
 
             @Override
