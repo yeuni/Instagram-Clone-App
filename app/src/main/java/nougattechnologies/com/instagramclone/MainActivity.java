@@ -30,9 +30,27 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
-        getSupportFragmentManager().beginTransaction().
-                replace(R.id.fragment_container,new HomeFragment()).commit();
+Bundle intent = getIntent().getExtras();
+if (intent!=null){
+    String publisher = intent.getString("publisherid");
 
+    SharedPreferences.Editor editor = getSharedPreferences("PREFS",MODE_PRIVATE).edit();
+    editor.putString("profileid",publisher);
+    editor.apply();
+
+    getSupportFragmentManager().beginTransaction().
+            replace(R.id.fragment_container,new ProfileFragment()).commit();
+
+
+}else {
+    getSupportFragmentManager().beginTransaction().
+            replace(R.id.fragment_container,new HomeFragment()).commit();
+
+}
+
+//        getSupportFragmentManager().beginTransaction().
+//                replace(R.id.fragment_container,new HomeFragment()).commit();
+//
 
         }
         private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener=
