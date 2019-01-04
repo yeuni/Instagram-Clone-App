@@ -48,7 +48,7 @@ ImageButton my_fotos,saved_fotos;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
 
         View view;
         view= inflater.inflate(R.layout.fragment_profile, container, false);
