@@ -1,14 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment.ProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Profile_fragment" />
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        android:id="@+id/bar" >
 
-</FrameLayout>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:background="?android:attr/windowBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/colorPrimaryDark"
+                    android:id="@+id/username"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:text="Usename"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:layout_marginEnd="10dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_options"
+                    android:id="@+id/options"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_below="@id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:padding="16dp"
+            android:id="@+id/top_bar"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="70dp"
+                android:padding="3dp"
+                android:id="@+id/image_profile"
+                android:layout_height="70dp" />
+
+            <LinearLayout
+                android:paddingRight="4dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:layout_gravity="center"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:id="@+id/posts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:text="Posts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginLeft="35dp"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:id="@+id/followers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:text="Followers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginLeft="35dp"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:id="@+id/following"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:text="Following"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Button
+                    android:padding="3dp"
+                    android:background="@drawable/button_black"
+                    android:id="@+id/edit_profile"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/mid_bar"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16dp"
+                android:id="@+id/fullname"
+                android:maxLines="1"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:maxLines="5"
+                android:id="@+id/bio"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@drawable/button_black"
+            android:orientation="horizontal"
+            android:id="@+id/last_bar"
+            android:layout_marginRight="-5dp"
+            android:layout_marginLeft="-5dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                style="?android:attr/buttonBarButtonStyle"
+                android:src="@drawable/ic_grid"
+                android:id="@+id/my_fotos"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <ImageButton
+                style="?android:attr/buttonBarButtonStyle"
+                android:src="@drawable/ic_savee"
+                android:id="@+id/my_save"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <android.support.v7.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/recycler_view_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
