@@ -3,46 +3,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.NotificationFragment">
+    tools:context=".Fragment.PostDetailsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
         android:id="@+id/bar"
         android:background="?android:attr/windowBackground"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     <android.support.v7.widget.Toolbar
-        android:background="?android:attr/windowBackground"
         android:id="@+id/toolbar"
+        android:background="?android:attr/windowBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+<RelativeLayout
 
 
-            <TextView
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
-                android:id="@+id/post"
-                android:text="Notifications"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-        </RelativeLayout>
+    <TextView
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:text="Photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+</RelativeLayout>
 
     </android.support.v7.widget.Toolbar>
-
-
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:layout_margin="3dp"
         android:layout_below="@id/bar"
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

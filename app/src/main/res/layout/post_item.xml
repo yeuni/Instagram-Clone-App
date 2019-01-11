@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="7dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_margin="5dp"
@@ -106,10 +112,9 @@ android:text="username"
 </LinearLayout>
 
         <TextView
-            android:layout_margin="5dp"
+            android:padding="3dp"
+            android:layout_margin="3dp"
             android:text="View All 20 Comments"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="5dp"
             android:textColor="@color/colorAccent"
             android:id="@+id/comments"
             android:textStyle="bold"
@@ -121,3 +126,4 @@ android:text="username"
     </LinearLayout>
 
 </RelativeLayout>
+</ScrollView>

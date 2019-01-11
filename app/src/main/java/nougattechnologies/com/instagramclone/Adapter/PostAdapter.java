@@ -2,8 +2,10 @@ package nougattechnologies.com.instagramclone.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +22,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.List;
 
 import nougattechnologies.com.instagramclone.CommentsActivity;
+import nougattechnologies.com.instagramclone.Fragment.PostDetailsFragment;
+import nougattechnologies.com.instagramclone.Fragment.ProfileFragment;
 import nougattechnologies.com.instagramclone.Model.Post;
 import nougattechnologies.com.instagramclone.Model.User;
 import nougattechnologies.com.instagramclone.R;
@@ -67,6 +72,76 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 isLikes(post.getPostid(),viewHolder.like);
 nrLikes(viewHolder.likes,post.getPostid());
 getComments(post.getPostid(),viewHolder.comments);
+isSaved(post.getPostid(),viewHolder.save);
+
+        viewHolder.image_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+                editor.putString("profileid",post.getPublisher());
+                editor.apply();
+                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ProfileFragment()).commit();
+
+
+            }
+        });
+
+        viewHolder.username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+                editor.putString("profileid",post.getPublisher());
+                editor.apply();
+                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ProfileFragment()).commit();
+
+
+            }
+        });
+
+        viewHolder.publisher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+                editor.putString("profileid",post.getPublisher());
+                editor.apply();
+                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ProfileFragment()).commit();
+
+
+            }
+        });
+
+        viewHolder.post_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+                editor.putString("postid",post.getPostid());
+                editor.apply();
+                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new PostDetailsFragment()).commit();
+
+
+            }
+        });
+
+viewHolder.save.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        if (viewHolder.save.getTag().equals("save")){
+            FirebaseDatabase.getInstance().getReference().child("Saves").child(firebaseUser.getUid())
+                    .child(post.getPostid()).setValue(true);
+
+
+        }else {
+            FirebaseDatabase.getInstance().getReference().child("Saves").child(firebaseUser.getUid())
+                    .child(post.getPostid()).removeValue();
+        }
+    }
+});
+
+
 
 viewHolder.like.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -74,6 +149,10 @@ viewHolder.like.setOnClickListener(new View.OnClickListener() {
         if (viewHolder.like.getTag().equals("like")){
             FirebaseDatabase.getInstance().getReference().child("Likes").child(post.getPostid())
                     .child(firebaseUser.getUid()).setValue(true);
+addNotifications(post.getPublisher(),post.getPostid());
+
+
+
         }else {
             FirebaseDatabase.getInstance().getReference().child("Likes").child(post.getPostid())
                     .child(firebaseUser.getUid()).removeValue();
@@ -181,6 +260,21 @@ private void isLikes(String postid, final ImageView imageView){
 
 }
 
+private void addNotifications(String userid,String postid){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(userid);
+
+    HashMap<String,Object> hashMap = new HashMap<>();
+    hashMap.put("userid",firebaseUser.getUid());
+    hashMap.put("text","liked your post");
+    hashMap.put("postid",postid);
+    hashMap.put("ispost",true);
+
+    reference.push().setValue(hashMap);
+
+}
+
+
+
 public void nrLikes(final TextView likes,String postid){
         DatabaseReference reference = FirebaseDatabase
                 .getInstance().getReference().child("Likes")
@@ -210,6 +304,32 @@ public void nrLikes(final TextView likes,String postid){
                 username.setText(user.getUsername());
                 publisher.setText(user.getUsername());
 
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void isSaved(final String postid, final ImageView imageView) {
+        FirebaseUser firebaseUser =FirebaseAuth.getInstance().getCurrentUser();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Saves")
+                .child(firebaseUser.getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child(postid).exists()){
+                    imageView.setImageResource(R.drawable.ic_savee_black);
+                    imageView.setTag("saved");
+
+                }else {
+
+                    imageView.setImageResource(R.drawable.ic_savee);
+                    imageView.setTag("save");
+                }
             }
 
             @Override
