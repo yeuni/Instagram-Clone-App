@@ -1,6 +1,7 @@
 package nougattechnologies.com.instagramclone.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
@@ -25,6 +26,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import nougattechnologies.com.instagramclone.Fragment.ProfileFragment;
+import nougattechnologies.com.instagramclone.MainActivity;
 import nougattechnologies.com.instagramclone.Model.User;
 import nougattechnologies.com.instagramclone.R;
 
@@ -32,10 +34,12 @@ public class UserAdapter  extends RecyclerView.Adapter<UserAdapter.viewHolder>  
 private Context mContext;
 private List<User>mUsers;
 private FirebaseUser firebaseUser;
+private boolean isfragment;
 
-public UserAdapter(Context mContext,List<User>mUsers){
+public UserAdapter(Context mContext,List<User>mUsers,boolean isfragment){
     this.mContext=mContext;
     this.mUsers=mUsers;
+    this.isfragment=isfragment;
 
 
 }
@@ -66,12 +70,23 @@ public UserAdapter(Context mContext,List<User>mUsers){
 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        SharedPreferences.Editor editor =mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
-        editor.putString("profileid",user.getId());
-        editor.apply();
+if (isfragment) {
 
-        ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-               new ProfileFragment()).commit();
+    SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+    editor.putString("profileid", user.getId());
+    editor.apply();
+
+    ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+            new ProfileFragment()).commit();
+}else {
+    Intent intent = new Intent(mContext,MainActivity.class);
+    intent.putExtra("publisherid",user.getId());
+    mContext.startActivity(intent);
+
+
+
+}
+
 
     }
 });

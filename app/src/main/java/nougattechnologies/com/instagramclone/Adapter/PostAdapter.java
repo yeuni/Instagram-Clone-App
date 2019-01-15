@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import nougattechnologies.com.instagramclone.CommentsActivity;
+import nougattechnologies.com.instagramclone.FollowersActivity;
 import nougattechnologies.com.instagramclone.Fragment.PostDetailsFragment;
 import nougattechnologies.com.instagramclone.Fragment.ProfileFragment;
 import nougattechnologies.com.instagramclone.Model.Post;
@@ -58,7 +60,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         final Post post =mPost.get(i);
-        Glide.with(mContext).load(post.getPostimage()).into(viewHolder.post_image);
+        Glide.with(mContext).load(post.getPostimage())
+                .apply(new RequestOptions().placeholder(R.drawable.placeholder))
+                .into(viewHolder.post_image);
 
         if (post.getDescription().equals("")){
             viewHolder.description.setVisibility(View.GONE);
@@ -180,6 +184,17 @@ viewHolder.comment.setOnClickListener(new View.OnClickListener() {
                 mContext.startActivity(intent);
 
 
+
+            }
+        });
+
+        viewHolder.likes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext,FollowersActivity.class);
+                intent.putExtra("id",post.getPostid());
+                intent.putExtra("title","likes");
+                mContext.startActivity(intent);
 
             }
         });

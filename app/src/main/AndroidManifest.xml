@@ -30,7 +30,9 @@
 
         <activity android:name=".PostActivity" />
         <activity android:name=".CommentsActivity" />
-        <activity android:name=".EditProfileActivity"></activity>
+        <activity android:name=".EditProfileActivity" />
+        <activity android:name=".FollowersActivity" />
+        <activity android:name=".OptionsActivity"></activity>
     </application>
 
 </manifest>

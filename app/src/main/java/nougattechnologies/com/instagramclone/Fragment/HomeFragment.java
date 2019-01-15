@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +34,8 @@ private List<Post>postLists;
 
 private List<String>followingList;
 
+ProgressBar progressBar;
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -53,6 +56,10 @@ private List<String>followingList;
         postLists=new ArrayList<>();
         postAdapter=new PostAdapter(getContext(),postLists);
         recyclerView.setAdapter(postAdapter);
+
+        progressBar = view.findViewById(R.id.progress_circular);
+
+
 checkFollowing();
         return view;
     }
@@ -99,6 +106,7 @@ for (DataSnapshot snapshot : dataSnapshot.getChildren()){
     }
 }
 postAdapter.notifyDataSetChanged();
+progressBar.setVisibility(View.GONE);
             }
 
             @Override

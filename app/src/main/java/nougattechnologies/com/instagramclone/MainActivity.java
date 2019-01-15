@@ -1,7 +1,10 @@
 package nougattechnologies.com.instagramclone;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -10,6 +13,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -17,6 +21,7 @@ import nougattechnologies.com.instagramclone.Fragment.HomeFragment;
 import nougattechnologies.com.instagramclone.Fragment.NotificationFragment;
 import nougattechnologies.com.instagramclone.Fragment.ProfileFragment;
 import nougattechnologies.com.instagramclone.Fragment.SearchFragment;
+import nougattechnologies.com.instagramclone.Model.User;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
@@ -79,6 +84,17 @@ if (intent!=null){
                                 SharedPreferences.Editor editor =getSharedPreferences("PREFS",MODE_PRIVATE).edit();
                                 editor.putString("profileid",FirebaseAuth.getInstance().getCurrentUser().getUid());
                                 editor.apply();
+
+
+//                                SharedPreferences pref =getSharedPreferences("PICSPREFS",Context.MODE_PRIVATE);
+//                                String id = pref.getString("facebook_id", "empty");
+//
+//                                Bitmap myBitmap = id;
+//                                        menuItem.setIcon(new BitmapDrawable(getResources(), myBitmap));
+//
+
+
+
                                 selectedFragment =new ProfileFragment();
 
                                 break;

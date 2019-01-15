@@ -34,9 +34,13 @@ import java.util.List;
 
 import nougattechnologies.com.instagramclone.Adapter.MyPhotosAdapter;
 import nougattechnologies.com.instagramclone.EditProfileActivity;
+import nougattechnologies.com.instagramclone.FollowersActivity;
 import nougattechnologies.com.instagramclone.Model.Post;
 import nougattechnologies.com.instagramclone.Model.User;
+import nougattechnologies.com.instagramclone.OptionsActivity;
 import nougattechnologies.com.instagramclone.R;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,7 +76,7 @@ List<Post> postList_saves;
         view= inflater.inflate(R.layout.fragment_profile, container, false);
 firebaseUser =FirebaseAuth.getInstance().getCurrentUser();
 
-        SharedPreferences prefs=getContext().getSharedPreferences("PREFS",Context.MODE_PRIVATE);
+        SharedPreferences prefs=getContext().getSharedPreferences("PREFS",MODE_PRIVATE);
         profileid=prefs.getString("profileid","none");
 
         image_profile=view.findViewById(R.id.image_profile);
@@ -159,6 +163,15 @@ startActivity(new Intent(getContext(),EditProfileActivity.class));
             }
         });
 
+        options.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getContext(),OptionsActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
         my_fotos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,6 +181,9 @@ startActivity(new Intent(getContext(),EditProfileActivity.class));
             }
         });
 
+
+
+
         saved_fotos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,6 +192,32 @@ startActivity(new Intent(getContext(),EditProfileActivity.class));
 
             }
         });
+
+        followers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),FollowersActivity.class);
+                intent.putExtra("id",profileid);
+                intent.putExtra("title","followers");
+                startActivity(intent);
+
+
+            }
+        });
+
+
+        following.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),FollowersActivity.class);
+                intent.putExtra("id",profileid);
+                intent.putExtra("title","following");
+                startActivity(intent);
+
+
+            }
+        });
+
 
         return view;
 
@@ -203,6 +245,22 @@ startActivity(new Intent(getContext(),EditProfileActivity.class));
                 }
 
                 User user =dataSnapshot.getValue(User.class);
+
+                //SharedPreferences sharedPreferences = getContext().getSharedPreferences("PREFS",Context.MODE_PRIVATE);
+                //        postid =sharedPreferences.getString("postid","none");
+
+
+
+
+                String userpic=user.getImageurl();
+//
+//
+//                SharedPreferences pref = getActivity().getSharedPreferences("PICSPREFS",Context.MODE_PRIVATE);
+//                SharedPreferences.Editor edt = pref.edit();
+//                edt.putString("facebook_id", userpic);
+//                edt.apply();
+//
+
 
                 Glide.with(getContext()).load(user.getImageurl()).into(image_profile);
                 username.setText(user.getUsername());

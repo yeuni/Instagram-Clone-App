@@ -52,7 +52,7 @@ EditText search_bar;
         search_bar=view.findViewById(R.id.search_bar);
 
         mUsers=new ArrayList<>();
-        userAdapter=new UserAdapter(getContext(),mUsers);
+        userAdapter=new UserAdapter(getContext(),mUsers,true);
         recyclerView.setAdapter(userAdapter);
 
         readUsers();
