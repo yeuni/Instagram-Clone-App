@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowId;
 import android.widget.ProgressBar;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,7 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nougattechnologies.com.instagramclone.Adapter.PostAdapter;
+import nougattechnologies.com.instagramclone.Adapter.StoryAdapter;
 import nougattechnologies.com.instagramclone.Model.Post;
+import nougattechnologies.com.instagramclone.Model.Story;
 import nougattechnologies.com.instagramclone.R;
 
 /**
@@ -35,6 +38,14 @@ private List<Post>postLists;
 private List<String>followingList;
 
 ProgressBar progressBar;
+
+
+private RecyclerView recyclerView_story;
+private StoryAdapter storyAdapter;
+private List<Story> storyList;
+
+
+
 
 
     public HomeFragment() {
@@ -56,6 +67,20 @@ ProgressBar progressBar;
         postLists=new ArrayList<>();
         postAdapter=new PostAdapter(getContext(),postLists);
         recyclerView.setAdapter(postAdapter);
+
+
+        recyclerView_story =view.findViewById(R.id.recycler_view_stories);
+        recyclerView_story.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(getContext(),
+                LinearLayoutManager.HORIZONTAL,false);
+        recyclerView_story.setLayoutManager(linearLayoutManager1);
+        storyList=new ArrayList<>();
+        storyAdapter =new StoryAdapter(getContext(),storyList);
+        recyclerView_story.setAdapter(storyAdapter);
+
+
+
+
 
         progressBar = view.findViewById(R.id.progress_circular);
 
@@ -79,6 +104,7 @@ checkFollowing();
                    followingList.add(snapshot.getKey());
                }
                readPosts();
+               readStory();
             }
 
             @Override
@@ -114,6 +140,43 @@ progressBar.setVisibility(View.GONE);
 
             }
         });
+    }
+    private  void readStory(){
+        DatabaseReference reference =FirebaseDatabase.getInstance().getReference("Story");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                long timecurrent =System.currentTimeMillis();
+                storyList.clear();
+                storyList.add(new Story("",0,0,"",
+                        FirebaseAuth.getInstance().getCurrentUser().getUid()));
+
+                for (String id:followingList){
+                    int countStory = 0;
+                    Story story = null;
+                    for (DataSnapshot snapshot: dataSnapshot.child(id).getChildren()){
+                        story =snapshot.getValue(Story.class);
+                        if (timecurrent>story.getTimestart() && timecurrent<story.getTimeend()){
+                            countStory++;
+                        }
+                    }
+
+                    if (countStory>0){
+                        storyList.add(story);
+                    }
+
+
+                }
+                storyAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
 }

@@ -37,5 +37,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:11.8.0'
     implementation 'com.google.firebase:firebase-storage:11.8.0'
     implementation 'com.google.firebase:firebase-auth:11.8.0'
+
+    implementation 'com.github.shts:StoriesProgressView:3.0.0'
+
     //implementation 'com.google.firebase:firebase-auth:11.8.0'
 }
