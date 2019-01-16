@@ -247,8 +247,7 @@ startActivity(new Intent(getContext(),EditProfileActivity.class));
                 User user =dataSnapshot.getValue(User.class);
 
                 //SharedPreferences sharedPreferences = getContext().getSharedPreferences("PREFS",Context.MODE_PRIVATE);
-                //        postid =sharedPreferences.getString("postid","none");
-
+                //
 
 
 
