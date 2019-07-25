@@ -1,0 +1,2 @@
+# Instagram-Clone-App
+Instagram Clone App-(Android App) BACK END DATABASE: Firebase Database. APP FEATURES: 1.User Login 2.User Registration 3.Post Feeds 4.User able to Post photos. 5.User able to follow other users 6.User able to likes other users posts 7. User  able to Comment other users posts 8.User able to to Save other users posts 9 .User able to Edit Profile and Update 10.User Profile(Posts counter,Followers counter,Following counter,Bio and Posts) 11.Search Users 12.Logout
