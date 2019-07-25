@@ -1,7 +1,10 @@
 package nougattechnologies.com.instagramclone.Adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,9 +23,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
+import nougattechnologies.com.instagramclone.AddStoryActivity;
 import nougattechnologies.com.instagramclone.Model.Story;
 import nougattechnologies.com.instagramclone.Model.User;
 import nougattechnologies.com.instagramclone.R;
+import nougattechnologies.com.instagramclone.StoryActivity;
 
 public class StoryAdapter  extends RecyclerView.Adapter<StoryAdapter.ViewHolder>{
 private Context mContext;
@@ -49,7 +54,7 @@ return new StoryAdapter.ViewHolder(view);
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
 
-        Story story = mStory.get(i);
+        final Story story = mStory.get(i);
         userInfo(viewHolder,story.getUserid(),i);
 
 if (viewHolder.getAdapterPosition()!=0){
@@ -69,6 +74,9 @@ viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 
 
         }else {
+            Intent intent = new Intent(mContext,StoryActivity.class);
+            intent.putExtra("userid",story.getUserid());
+            mContext.startActivity(intent);
             //TODO:go to story
 
 
@@ -153,6 +161,37 @@ viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 
                 if (click){
                     //TODO:show alert dialog
+
+                    if (count>0){
+                        AlertDialog alertDialog = new AlertDialog.Builder(mContext).create();
+                        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "View Story",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(mContext,StoryActivity.class);
+                                        intent.putExtra("userid",FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                        mContext.startActivity(intent);
+                                        dialog.dismiss();
+
+                                        //Todo:go to story
+                                    }
+                                });
+                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Add Story",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent =new Intent(mContext,AddStoryActivity.class);
+                                        mContext.startActivity(intent);
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+
+                    }else {
+                        Intent intent =new Intent(mContext,AddStoryActivity.class);
+                        mContext.startActivity(intent);
+
+                    }
 
                 }else {
 

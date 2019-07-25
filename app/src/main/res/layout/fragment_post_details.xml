@@ -40,7 +40,6 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_margin="3dp"
         android:layout_below="@id/bar"
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"

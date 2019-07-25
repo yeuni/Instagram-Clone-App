@@ -251,7 +251,7 @@ startActivity(new Intent(getContext(),EditProfileActivity.class));
 
 
 
-                String userpic=user.getImageurl();
+               // String userpic=user.getImageurl();
 //
 //
 //                SharedPreferences pref = getActivity().getSharedPreferences("PICSPREFS",Context.MODE_PRIVATE);

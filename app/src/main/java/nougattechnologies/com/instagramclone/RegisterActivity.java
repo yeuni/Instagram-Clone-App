@@ -71,7 +71,7 @@ ProgressDialog pd;
                }else if(str_password.length()<6){
                    Toast.makeText(RegisterActivity.this, "Password must have 6 characters", Toast.LENGTH_SHORT).show();
                } else{
-register(str_username,str_fullname,str_email,str_password);
+               register(str_username,str_fullname,str_email,str_password);
                }
 
 
@@ -108,9 +108,9 @@ register(str_username,str_fullname,str_email,str_password);
                                         Intent intent =new Intent(RegisterActivity.this,MainActivity.class);
 
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        intent.putExtra("EXTRA_SESSION_ID", username);
-                                        startActivity(intent);
-                                    }
+                                    intent.putExtra("EXTRA_SESSION_ID", username);
+                                    startActivity(intent);
+                                }
                                 }
                             });
                             

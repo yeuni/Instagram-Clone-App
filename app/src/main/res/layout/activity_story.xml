@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StoryActivity">
+
+<ImageView
+    android:scaleType="centerCrop"
+    android:src="@drawable/mam"
+    android:id="@+id/image"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/skip"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+
+        <View
+            android:id="@+id/reverse"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <jp.shts.android.storiesprogressview.StoriesProgressView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:id="@+id/stories"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:gravity="top"
+        android:layout_marginTop="8dp"
+        />
+
+    <RelativeLayout
+        android:layout_margin="10dp"
+        android:layout_below="@id/stories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="30dp"
+            android:id="@+id/story_photo"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:id="@+id/story_username"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="username"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_toEndOf="@id/story_photo"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:background="#20000000"
+        android:layout_margin="10dp"
+        android:padding="3dp"
+        android:id="@+id/r_seen"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:src="@drawable/ic_storyseen"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+<TextView
+    android:id="@+id/seen_number"
+    android:textColor="#fff"
+    android:textStyle="bold"
+    android:layout_gravity="center"
+    android:textSize="16sp"
+    android:layout_marginStart="5dp"
+    android:text="0"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+        android:background="#20000000"
+        android:padding="3dp"
+        android:id="@+id/story_delete"
+        android:src="@drawable/ic_storydelete"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
