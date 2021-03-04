@@ -91,6 +91,8 @@ ProgressDialog pd;
                         if (task.isSuccessful()){
                             FirebaseUser firebaseUser=auth.getCurrentUser();
                             String userid=firebaseUser.getUid();
+                            
+                            //here we are register user data using firbase generated token
 
                             reference=FirebaseDatabase.getInstance().getReference().child("Users").child(userid);
                             HashMap<String,Object>hashMap =new HashMap<>();
