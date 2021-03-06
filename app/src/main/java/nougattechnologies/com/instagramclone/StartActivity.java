@@ -41,6 +41,8 @@ FirebaseUser firebaseUser;
 
             }
         });
+        
+        //go to register activity
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
